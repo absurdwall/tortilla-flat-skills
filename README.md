@@ -16,17 +16,29 @@ ln -s "$PWD/skills/management/learning-library-add" "$HOME/.agents/skills/learni
 
 这是实时源码链接，源码更新会影响已安装 skill。安装后检查链接目标，并在新聊天的技能列表中确认；若未显示，重启 Codex。链接存在本身不证明当前聊天已经刷新了发现列表。
 
-在 Bridge、Research 等聊天中说：
+在 Bridge、Research 等聊天的消息框中写技能名，再指定 HTML 文件即可。这是一条对话指令，不是终端命令：
 
-> 用 $learning-library-add，把 `/绝对路径/lesson.html` 加到 Learning Library，先准备草稿。
+```text
+$learning-library-add 把 /绝对路径/lesson.html 保存到 Learning Library，作为草稿登记并给我预览。
+```
 
-也可以自然地说“把这页加到 Learning Library”。页面指代不明时，skill 会先定位具体文件。它会保留原项目记录，处理 CSS、图片、关联参考页等传递依赖，准备独立页面包、候选条目与私人来源说明，保存到真实 Library 仓库并登记，再调用 Library 原生构建器在临时副本中检查。
+同一聊天中刚生成了唯一明确的 HTML 时，也可以写：
+
+```text
+$learning-library-add 把刚才生成的 HTML 加到 Learning Library。
+```
+
+换聊天或有多个候选页面时，提供完整文件路径、附件或明确的页面链接。也可以自然地说“把这页加到 Learning Library”；指代不明时，skill 会先定位具体文件。它会保留原项目记录，处理 CSS、图片、关联参考页等传递依赖，保存独立页面包、候选条目与来源说明，登记并读回，再调用 Library 原生构建器在临时副本中检查。
+
+日常收纳遵循 Library 自己 README 中的内容流程：通常在本地 `main` 保存、登记、检查和提交，不默认每页建 PR。push 是另行请求的远端同步；当前若已有待审阅分支/PR，则保留并报告实际状态，不自动合并或切换分支。修改 Library 构建、校验或发布逻辑仍走分支/PR。正式收录与公开部署继续需要各自的明确批准。
 
 ## 检查草稿
 
 草稿保存在 Library 仓库的 `library-pages/<slug>/`：`public/` 放独立页面，旁边的 `entry.json` 保存候选条目，`notes.md` 保存私人来源、路径映射、依赖清单与检查结果。Library 的私人草稿索引登记该条目；没有现成索引时，skill 建立并链接根目录的 `DRAFTS.md`。这些产物不放进本公开 skills 仓库。
 
 默认交接完成必须确认三件事：文件确实写进目标 Library 仓库；索引中有唯一且链接有效的登记；元数据、声明文件与登记均已读回核对。外部临时包和预览目录不能替代这一交接。只有你明确要求仅预览、不写目标仓库时，才停留在外部草稿，并说明尚未交接。
+
+下面的命令只检查已准备好的包，不代替上面的完整 skill 调用；正常使用时由 agent 执行：
 
 ```sh
 node skills/management/learning-library-add/scripts/check-draft.mjs \

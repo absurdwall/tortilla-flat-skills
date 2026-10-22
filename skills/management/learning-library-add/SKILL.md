@@ -31,7 +31,7 @@ Prepare `entry.json` as one complete proposed catalog entry under the current sc
 
 ## Save and register the draft
 
-Follow the Library's branch/review workflow. Save the package at `library-pages/<slug>/`: its page files under `public/`, with `entry.json`, `notes.md`, and any proposed thumbnail sources beside that boundary. Reuse an identical existing draft; inspect differing content before an intentional update, preserving unrelated work. Copying a draft into this private source tree is separate from editing the canonical catalog.
+Follow the Library README's private-draft content workflow for branch, commit, and remote-sync behavior; a page intake alone does not require a PR. Save the package at `library-pages/<slug>/`: its page files under `public/`, with `entry.json`, `notes.md`, and any proposed thumbnail sources beside that boundary. Reuse an identical existing draft; inspect differing content before an intentional update, preserving unrelated work. Copying a draft into this private source tree is separate from editing the canonical catalog.
 
 Use the destination's existing private draft index. If none exists, create a small `DRAFTS.md` Markdown index at the Library root and link it from that repository's README. Record one entry per stable ID, linking to the saved page and candidate metadata, with its source project, registration date, draft state, and checks/blockers. This is a source-file handoff record maintained by the skill; it needs no new Library application feature or public catalog field.
 
@@ -51,7 +51,7 @@ Preview the returned `artifact` with the Library's current `scripts/serve.mjs`, 
 
 ## Complete the authorized handoff
 
-For the default draft handoff, report the verified Library root, saved draft directory, index record, readback result, preview, and remaining checks/blockers. State the actual Git status: local files, local commit, open PR, or merged. A source-file draft index provides findability inside the repository; it does not imply a private web reader or formal admission. For a draft-only request, finish here.
+After the checks and readback, commit only this handoff's files through the Library's content workflow. Report the verified Library root, saved draft directory, index record, readback result, preview, and remaining checks/blockers. State the branch and actual Git status: local files, local commit, pushed, open PR, or merged; report a failed commit separately from confirmed file/registration writes. A source-file draft index provides findability inside the repository; it does not imply a private web reader or formal admission. For a draft-only request, finish here.
 
 Once all dependency blockers are resolved and the exact formal admission is authorized, promote the saved draft through the destination's current branch/review workflow. Apply only the approved canonical catalog change and any approved page edits, then run the destination's required checks. Keep `notes.md` private. Re-read the saved entry and declared files and update the draft record's state. Record approval evidence through the Library's current publication-record procedure; a skill run or passing build cannot supply approval. Material revisions after approval need approval of the revised result. Prepare a reviewable change before requesting any still-required approval.
 
