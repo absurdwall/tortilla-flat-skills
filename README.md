@@ -24,7 +24,7 @@ ln -s "$PWD/skills/management/learning-library-add" "$HOME/.agents/skills/learni
 
 ## 检查草稿
 
-准备目录包含 `public/`（仅独立页面）、`entry.json`（候选 catalog 条目）和可选 `notes.md`（私人来源、路径映射、未决项）。这些产物保存在私有临时目录或 Library 的合适草稿位置，不放进本公开源码仓库。
+准备目录包含 `public/`（仅独立页面）、`entry.json`（候选 catalog 条目）和 `notes.md`（私人来源、路径映射、依赖清单与未决项）。这些产物保存在私有临时目录或 Library 的合适草稿位置，不放进本公开源码仓库。
 
 ```sh
 node skills/management/learning-library-add/scripts/check-draft.mjs \
@@ -34,7 +34,9 @@ node skills/management/learning-library-add/scripts/check-draft.mjs \
 
 脚本复用指定 Library checkout 的构建、依赖和 inventory 检查；只写新建临时目录。成功后输出预览 artifact 与 inventory 的位置。它不编辑正式 catalog、不登记已批准发布记录、不部署。使用 Library 的 `scripts/serve.mjs` 预览该临时 artifact；完成浏览器检查后再决定是否收录。
 
-默认结果是**草稿**。具体 catalog 条目经用户批准并读回后，才报告**已收录**；另行批准部署、并核对生产证据后，才报告**已公开发布**。当前 Library 支持未收录页面的私人预览；统一可浏览的私人收藏目录仍是待决定的产品能力。
+依赖清单完成时，每个引用都必须归入已打包文件、Library 规则允许保留的外链或附有原因的未解决依赖。未解决项作为收录阻塞项随草稿交付，可以继续其他草稿准备；全部解决后才能应用正式 catalog 收录变更。静态检查通过不能解除这些阻塞。
+
+默认结果是**草稿**。完成目标 Library 的收录流程，并在其正式源码中确认用户批准的具体条目和页面文件后，才报告**已收录**；本地改动或仍待必要 review/merge 的 PR 应报告为收录提案，并说明实际状态。另行批准部署、并核对所需生产证据后，才报告**已公开发布**。当前 Library 支持未收录页面的私人预览；统一可浏览的私人收藏目录仍是待决定的产品能力。
 
 验证入口：
 

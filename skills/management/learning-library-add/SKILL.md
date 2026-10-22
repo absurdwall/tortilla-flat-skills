@@ -1,6 +1,6 @@
 ---
 name: learning-library-add
-description: Add a specified HTML teaching page to Learning Library (把这页加到 Learning Library). Prepare a self-contained page package and candidate catalog entry, validate and preview it, then carry out only the specifically approved admission or publication steps.
+description: Prepare a specified HTML teaching page as a Learning Library intake draft (把这页加到 Learning Library).
 ---
 
 # Learning Library Add
@@ -21,7 +21,9 @@ Create a new private draft directory with `public/`, `entry.json`, and `notes.md
 
 Inventory the selected HTML's transitive local references: stylesheets and CSS imports/URLs, images and `srcset`, scripts and module imports, fonts, media, SVG references, and linked local reference pages. Follow references recursively with a visited set. Distinguish runtime resources from ordinary external HTTPS citations; retain citation anchors without fetching or mirroring them. Record missing, remote-runtime, generated, or dynamically computed dependencies for resolution rather than silently dropping them. Consult the Library's current dependency checker for the authoritative supported syntax and diagnostics.
 
-Copy only the selected page and its necessary dependencies. Establish a source-to-package path map, make the entry `public/index.html`, and rewrite affected URLs in the copies. Preserve subdirectory topology where useful, including reference pages' own assets and links back to the entry; retain queries and fragments. Every local dependency must resolve inside this page's boundary. Avoid broad project-tree copies. Record the file map and unresolved dependencies in `notes.md`.
+Copy only the selected page and its necessary dependencies. Establish a source-to-package path map, make the entry `public/index.html`, and rewrite affected URLs in the copies. Preserve subdirectory topology where useful, including reference pages' own assets and links back to the entry; retain queries and fragments. Every local dependency must resolve inside this page's boundary. Avoid broad project-tree copies. Record the file map in `notes.md`.
+
+The dependency inventory is complete when every reference is accounted for in `notes.md` as a packaged file, a retained external link allowed by the Library contract, or an unresolved dependency with its reason. Continue independent draft preparation with unresolved items recorded as admission blockers; passing static validation does not clear them.
 
 Keep the page's own presentation and interaction. Read the current Library return-link contract and an accepted page/test fixture; adapt that prescribed visible, accessibly named return link as the first content in the entry body. Reuse the current chrome instead of inventing or storing a second template here. The Library build applies its runtime policy to the output; verify that output in the browser.
 
@@ -43,7 +45,7 @@ Preview the returned `artifact` with the Library's current `scripts/serve.mjs`, 
 
 Present the concrete page package, proposed catalog entry, dependency inventory, preview, and unresolved content or metadata choices. If public intent is unclear, keep it a private draft and ask whether the user wants a preview-only draft or approval of this exact public catalog proposal. The existing private-preview feature does not establish a browsable private collection or private catalog schema.
 
-When the exact admission is authorized, follow the destination's current branch/review workflow. Add the package under `library-pages/<slug>/public/`, apply only the approved canonical catalog change, and run the destination's required checks. Keep `notes.md` private. Re-read the saved entry and declared files. Record approval evidence through the Library's current publication-record procedure; a skill run or passing build cannot supply approval. Material revisions after approval need approval of the revised result. Prepare a reviewable change before requesting any still-required approval.
+Once all dependency blockers are resolved and the exact admission is authorized, follow the destination's current branch/review workflow. Add the package under `library-pages/<slug>/public/`, apply only the approved canonical catalog change, and run the destination's required checks. Keep `notes.md` private. Re-read the saved entry and declared files. Record approval evidence through the Library's current publication-record procedure; a skill run or passing build cannot supply approval. Material revisions after approval need approval of the revised result. Prepare a reviewable change before requesting any still-required approval.
 
 For publication, follow the Library's current separately approved revision, artifact-inventory, manual deployment, and production verification procedure. This skill does not grant merge or deploy permission. Report partial or failed results using the destination's evidence, with no automatic deployment retries.
 
