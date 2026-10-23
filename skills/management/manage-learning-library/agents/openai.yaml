@@ -1,0 +1,3 @@
+interface:
+  display_name: "Manage Learning Library"
+  short_description: "Collect resources, organize collections, and check updates"
