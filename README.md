@@ -2,7 +2,35 @@
 
 用户自有、跨项目 skills 的源码仓库。按 `skills/<category>/<skill-name>/SKILL.md` 分类；目标项目继续维护自己的内容、校验器与发布规则。
 
-目前只有一项：[manage-learning-library](skills/management/manage-learning-library/SKILL.md)，归入 `management`，用于收录页面或链接、整理项目集合，以及检查和刷新指定资源；默认保存为私人草稿。
+目前有三项，归入 `management`：
+
+- [manage-learning-library](skills/management/manage-learning-library/SKILL.md)：用于收录页面或链接、整理项目集合，以及检查和刷新指定资源；默认保存为私人草稿。
+- [management-workspace-update](skills/management/management-workspace-update/SKILL.md)：从近期 Codex 工作出发，轻量盘点项目方向、未完成事项和追踪缺口，按请求更新 Management 进展。
+- [management-workspace-review](skills/management/management-workspace-review/SKILL.md)：检查活跃项目的本地与远端分支、额外 worktree、未提交改动及未推送 commits，先完成只读核查，再按项目给出明确的行动建议。
+
+## 项目盘点与更新
+
+将两个 `management-workspace-*` 文件夹分别链接到用户级发现目录，方式同下文。它们使用已安装且已绑定工作区的 `tortilla-flat-management` 包定位现有 Registry；原生 helper 继续负责管理数据写入和读回。
+
+```sh
+# 在仓库根目录执行；若目标已存在，先检查来源，不覆盖。
+ln -s "$PWD/skills/management/management-workspace-update" "$HOME/.agents/skills/management-workspace-update"
+ln -s "$PWD/skills/management/management-workspace-review" "$HOME/.agents/skills/management-workspace-review"
+```
+
+```text
+$management-workspace-update 帮我盘点现在各个项目在做什么、还差什么，并更新 Management 中已有项目的进展。
+$management-workspace-update 只检查 Codex 项目与 Registry 的差异，先不要写入。
+$management-workspace-review 检查活跃项目的工作环境，给我报告。
+```
+
+默认先看项目清单和近期聊天摘要，按需要读相关对话及 Issue、PR，形成足够可信的近况概览。盘点会指出覆盖范围、新项目和追踪缺口；写入更新时复用 Management 原生 helper 并读回确认。面板自身的状态统计与加载速度仍由产品实现负责。
+
+Update 开头醒目标明是否需要用户操作；没有待处理事项时直接说明“更新完成，无需操作”。每个项目概况控制在一两句话，详细证据通过链接或已有详细记录保留。
+
+Review 先完成能自行做的只读核查，再分两部分报告：全部仓库的现状总览，以及按项目组织的操作建议。总览包括本地与远端分支数、额外 worktree、未提交与未推送工作，以及保留分支的具体名称和理由；建议部分只列需要处理的项目，写清动作、具体对象和理由，无需点击链接才能看懂。没有建议事项时明确说明无需操作，另简要注明覆盖缺口。额外 worktree 不包含主 checkout。检查保留各项目的文件、Git 状态和远端 tracker；如请求保存报告，只写 Management 自有记录。Registry 继续保留在共享工作区根目录，这项维护授权不扩展到根仓库其他内容。
+
+`management-update` 已改名为 `management-workspace-update`。更新已有安装时，先核对旧链接确实指向本仓库的旧 skill，再移除该链接并安装新名称；保留来源不明的安装。
 
 ## 安装与调用
 
