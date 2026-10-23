@@ -2,7 +2,26 @@
 
 用户自有、跨项目 skills 的源码仓库。按 `skills/<category>/<skill-name>/SKILL.md` 分类；目标项目继续维护自己的内容、校验器与发布规则。
 
-目前只有一项：[learning-library-add](skills/management/learning-library-add/SKILL.md)，归入 `management`，默认将指定 HTML 教学页整理为独立草稿，保存到 Learning Library 仓库、登记并读回确认。
+目前有两项，归入 `management`：
+
+- [learning-library-add](skills/management/learning-library-add/SKILL.md)：将指定 HTML 教学页整理为独立草稿，保存到 Learning Library 仓库、登记并读回确认。
+- [management-update](skills/management/management-update/SKILL.md)：盘点 Codex 项目与 Management 登记的差异，查看实际 Issue、PR 和近期工作，按请求更新已有项目的进展摘要。
+
+## 项目盘点与更新
+
+将 `skills/management/management-update` 单独链接到用户级发现目录，方式同下文。它依赖已安装且已绑定工作区的 `tortilla-flat-management` skill/helper；已有工具继续负责 Registry 写入和读回。本仓库负责跨项目盘点流程。
+
+```sh
+# 在仓库根目录执行；若目标已存在，先检查来源，不覆盖。
+ln -s "$PWD/skills/management/management-update" "$HOME/.agents/skills/management-update"
+```
+
+```text
+$management-update 帮我盘点现在各个项目在做什么、还差什么，并更新 Management 中已有项目的进展。
+$management-update 只检查 Codex 项目与 Registry 的差异，先不要写入。
+```
+
+盘点会区分项目是否登记、生命周期、开放工作和实际执行迹象。新发现的项目不会全部被设为 active；身份不清或需要选择是否纳入的项目会单列。只读检查不提交摘要；更新请求通过原生 helper 写入并读回。它不改变面板自身的 Refresh 行为、首页状态统计或加载速度。
 
 ## 安装与调用
 
