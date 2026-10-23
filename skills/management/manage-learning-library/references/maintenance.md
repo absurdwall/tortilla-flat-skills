@@ -20,4 +20,4 @@ Apply the main skill's organization guidance if the updated material affects rea
 
 For a linked resource, refresh the requested Library metadata after checking available source evidence. Keep content at the canonical source URL and follow the Library's destination-migration rules for any proposed URL change. For Library-maintained content, stage edits to that authoritative copy.
 
-Validate staged content and applicable browser behavior. Before replacement, follow the contract's source/saved-version recheck and baseline-update procedure. Save within the request's scope and destination approval rules, then finish using the main skill's write completion criteria.
+Validate staged content using **Routine intake** and its focused browser check. Before replacement, follow the contract's source/saved-version recheck and baseline-update procedure. Save within the request's scope and destination approval rules, then finish using the main skill's write criteria.

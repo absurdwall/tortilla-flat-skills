@@ -13,18 +13,16 @@ URL-only candidates continue at **Save, register, and validate**. Hosted candida
 
 ## Prepare hosted content
 
-Inventory transitive local dependencies: HTML attributes and srcset, stylesheets and CSS imports/URLs, scripts and module imports, images, SVG, fonts, media, and linked reference pages. Follow recursively with a visited set. Account for every reference as a packaged file, a permitted external citation, or an unresolved blocker with its reason; consult the Library checker for supported syntax and diagnostics.
+Resolve transitive local dependencies, including linked reference pages, styles, scripts, images, and media. Account for each as a declared packaged file, a permitted external citation, or an unresolved blocker; use Library's checker for syntax and diagnostics.
 
-Copy the selected page and necessary dependencies, making the entry `public/index.html`. Preserve useful subdirectory topology, queries, fragments, reference-page round trips, presentation, and interaction. Rewrite affected URLs in the copies. Use the destination's current first-content return-link contract. Record source-to-package mappings and deliberate adaptations in private notes; keep original-project files intact.
-
-Preparation is complete when the candidate metadata and file mapping are accounted for, including unresolved blockers. A passed static check alone does not clear recorded dependency blockers.
+Copy the selected page and necessary dependencies, making the entry `public/index.html`. Preserve useful subdirectory topology, queries, fragments, reference-page round trips, presentation, and interaction. Rewrite affected URLs in the copies. Use the destination's current first-content return-link contract. Briefly explain deliberate adaptations in private notes; keep original-project files intact.
 
 ## Save, register, and validate
 
-Save the package at `library-pages/<slug>/`, including URL-only candidates. New collections can be proposed in private `collection.json` beside the entry; existing membership references the canonical collection. Keep provenance and check evidence outside `public/` and the public catalog.
+Save the package at `library-pages/<slug>/`, including URL-only candidates. Follow **Routine intake** in the Library contract for minimal durable records and temporary review output. New collections use `collection.json`; existing membership references the canonical collection.
 
-Use the destination's private draft index. If absent, create a small root `DRAFTS.md` and link it from README. Register one record with source, date, candidate kind, saved links, checks, and blockers. An explicit preview-only request instead uses external staging and reports destination saving/registration as unperformed.
+Use the destination's private draft index, creating and linking `DRAFTS.md` only if none exists. Register one identity with its saved links and current state. An explicit preview-only request uses external staging and reports saving/registration as unperformed.
 
-Run this skill's helper against the saved package, or staging for the preview-only exception. Repair draft-copy failures within scope. Serve the returned artifact at the Library's normal base path and label the simulated catalog as a private preview. Inspect applicable content, styles/assets, interactions, reference/return links, destination links, and collection navigation; check console/network behavior when available. Record unperformed checks and unresolved blockers.
+Run the helper against the saved package, or preview-only staging. It returns a temporary catalog proposal, artifact, and inventory for inspection and approval. Repair failures within scope, then serve that artifact as a private preview and perform the contract's focused browser check. Record the latest outcome and any blocker briefly.
 
-Finish using the main skill's write completion criteria. A saved candidate remains separate from formal catalog admission and publication.
+Finish using the main skill's write criteria. Follow Library's approval workflow when admission is requested; the generated proposal remains separate from canonical admission and publication.
