@@ -11,6 +11,11 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 export async function checkDraft({ library, packageRoot, mode = 'new' }) {
   if (!['new', 'update'].includes(mode)) throw new Error('mode must be new or update');
   library = await realpath(resolve(library));
+  const { engines } = JSON.parse(await readFile(join(library, 'package.json'), 'utf8'));
+  const requiredMajor = /^(\d+)\.x$/.exec(engines?.node ?? '')?.[1];
+  if (!requiredMajor || requiredMajor !== process.versions.node.split('.')[0]) {
+    throw new Error(`Use the Library's declared Node ${engines?.node ?? 'runtime'}; current Node is ${process.versions.node}. Select a compatible runtime and retry.`);
+  }
   packageRoot = await realpath(resolve(packageRoot));
   const catalogPath = join(library, 'catalog/catalog.json');
   const originalCatalog = await readFile(catalogPath, 'utf8');
@@ -104,7 +109,8 @@ export async function checkDraft({ library, packageRoot, mode = 'new' }) {
     const result = {
       state: mode === 'update' ? 'update-proposal' : 'draft', staticValidation: 'passed', browserValidation: 'pending',
       admission: 'not-performed', publication: 'not-performed',
-      scratch, artifact, inventory: inventoryPath,
+      scratch, artifact, proposalCatalog: join(source, 'catalog/catalog.json'), inventory: inventoryPath,
+      inventorySha256: createHash('sha256').update(inventory).digest('hex'),
       catalogSha256: createHash('sha256').update(originalCatalog).digest('hex'),
       entryId: entry.id, pagePath: entry.ownership.path,
       destination: entry.ownership.kind === 'library' ? entry.ownership.path : entry.ownership.url,

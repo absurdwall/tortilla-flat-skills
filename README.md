@@ -62,11 +62,11 @@ $manage-learning-library 把刚才生成的 HTML 加到 Learning Library。
 
 ## 检查草稿
 
-托管页面草稿保存在 Library 仓库的 `library-pages/<slug>/`：`public/` 放独立页面，旁边的 `entry.json` 保存候选条目，`notes.md` 保存私人来源、路径映射、依赖清单与检查结果。Library 的私人草稿索引登记该条目；没有现成索引时，skill 建立并链接根目录的 `DRAFTS.md`。链接候选只保存元数据和私人来源说明。这些产物不放进本公开 skills 仓库。
+托管页面草稿保存在 Library 仓库的 `library-pages/<slug>/`：`public/` 放独立页面，旁边的 `entry.json` 保存候选条目，`notes.md` 简记来源、必要改写和最新状态。持久记录与日常检查遵循目标 Library 管理契约的 `Routine intake`；生成的提案和详细检查输出留在临时预览目录。Library 的私人草稿索引登记该条目；没有现成索引时，skill 建立并链接根目录的 `DRAFTS.md`。链接候选只保存元数据和私人来源说明。这些产物不放进本公开 skills 仓库。
 
 默认交接完成必须确认三件事：文件确实写进目标 Library 仓库；索引中有唯一且链接有效的登记；元数据、声明文件与登记均已读回核对。外部临时包和预览目录不能替代这一交接。只有你明确要求仅预览、不写目标仓库时，才停留在外部草稿，并说明尚未交接。
 
-下面的命令只检查已准备好的包，不代替上面的完整 skill 调用；正常使用时由 agent 执行：
+使用目标 Library `package.json` 指定的 Node 版本运行。下面的命令只检查已准备好的包，不代替上面的完整 skill 调用；正常使用时由 agent 执行：
 
 ```sh
 node skills/management/manage-learning-library/scripts/check-draft.mjs \

@@ -16,7 +16,9 @@ Locate `absurdwall/tortilla-flat-learning-library` from an explicit user path or
 Load context for the action:
 
 - **Find/check:** Read the relevant canonical entries or private draft records and the contract sections named by the selected workflow.
-- **Write:** Also read the Library README's content/admission workflow. Consult the publication record when choosing a new identity, changing an admitted entry, or preparing publication. Use `GLOSSARY.md` when domain terms need clarification.
+- **Write:** Read the Library README's content/admission workflow and **Routine intake** in `docs/management-contract.md` for saved records, checks, and handoff. Consult the publication record for identity reservations or approval decisions, and `GLOSSARY.md` when terminology is unclear.
+
+Before running native commands or helpers, select the Node runtime declared in Library's `package.json`; choose a compatible installed or bundled runtime automatically if needed.
 
 When a required capability is missing, inspect attached worktrees and the verified repository's worktree list for an updated checkout identified by this task or the user. Verify and report that checkout's branch; otherwise report the missing capability. Keep schemas and validators in Library.
 
@@ -37,7 +39,7 @@ Read `docs/management-contract.md`, section **Public directory and collections**
 
 **Read-only:** Report the resources inspected, evidence, observations, and uncertainty. This completes a find/check request; packaging, previews, registration writes, baseline changes, and commits belong to write workflows.
 
-**Write:** Read saved metadata, applicable declared-file/source-record hashes, and index links back against the prepared result. Confirm one registration per stable identity, record actual checks and blockers, and commit only scoped files through the Library's content workflow. Report confirmed writes separately if validation, registration, or commit is incomplete.
+**Write:** Confirm saved metadata, applicable file hashes, and one working index registration against the prepared result, then commit scoped files through the Library's content workflow. Follow **Routine intake** for concise records and handoff; report incomplete validation or writes explicitly.
 
 Resolve helper paths relative to this skill folder, even when the working directory is another project. Run `node <skill-folder>/scripts/check-draft.mjs --library <checkout> --package <package>` for a new canonical candidate, including an existing private draft. Add `--mode update` when replacing an identity already in the canonical catalog. The helper builds a temporary proposal; saving and registration are separate workflow steps. Multi-entry changes use Library's native isolated-build workflow.
 
