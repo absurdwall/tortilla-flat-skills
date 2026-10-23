@@ -5,7 +5,7 @@
 目前有两项，归入 `management`：
 
 - [learning-library-add](skills/management/learning-library-add/SKILL.md)：将指定 HTML 教学页整理为独立草稿，保存到 Learning Library 仓库、登记并读回确认。
-- [management-update](skills/management/management-update/SKILL.md)：盘点 Codex 项目与 Management 登记的差异，查看实际 Issue、PR 和近期工作，按请求更新已有项目的进展摘要。
+- [management-update](skills/management/management-update/SKILL.md)：从近期 Codex 工作出发，轻量盘点项目方向、未完成事项和追踪缺口，按请求更新 Management 进展。
 
 ## 项目盘点与更新
 
@@ -21,7 +21,7 @@ $management-update 帮我盘点现在各个项目在做什么、还差什么，�
 $management-update 只检查 Codex 项目与 Registry 的差异，先不要写入。
 ```
 
-盘点会区分项目是否登记、生命周期、开放工作和实际执行迹象。新发现的项目不会全部被设为 active；身份不清或需要选择是否纳入的项目会单列。只读检查不提交摘要；更新请求通过原生 helper 写入并读回。它不改变面板自身的 Refresh 行为、首页状态统计或加载速度。
+默认先看项目清单和近期聊天摘要，按需要读相关对话及 Issue、PR，形成足够可信的近况概览。盘点会指出覆盖范围、新项目和追踪缺口；写入更新时复用 Management 原生 helper 并读回确认。面板自身的状态统计与加载速度仍由产品实现负责。
 
 ## 安装与调用
 
