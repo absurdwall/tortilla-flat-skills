@@ -1,3 +1,13 @@
+# Writing-for-agents review — 2026-10-23
+
+- Reviewed the canonical and legacy entry points, intake/maintenance references, and behavioral spec against `writing-for-agents` and `SKILL-MECHANICS.md`.
+- Separated read-only completion from write completion, made context loading action-specific, and replaced duplicated Library policy with conditional pointers to its authoritative contract sections.
+- Clarified helper path resolution and canonical-versus-private-draft modes, scoped link checks, URL-only intake routing, staged baseline preservation, and the review-only spec pointer. Agent-chosen reading order and existing invocation policy remain intact.
+- Both skill format validators pass; all six local Markdown pointers resolve; installed entry text matches source. Walked find, check, hosted/link intake, organization, and refresh paths against the acceptance cases.
+- This revision changes Markdown instructions only. Helper/product code and prior integration evidence are unchanged; no additional behavioral or browser test run is claimed.
+
+## Earlier implementation verification
+
 # Manage Learning Library validation — 2026-10-23
 
 - Library implementation and browser verification preceded this skill adaptation. Library source, collection, and publication rules remain destination-owned.

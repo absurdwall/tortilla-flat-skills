@@ -11,8 +11,9 @@ Required scenarios:
 3. Intake a stable public page as a URL-only candidate, with no mirrored site and no fictitious file-copy completion claim.
 4. Reuse an existing identity. Validate an intentional admitted update privately; reject accidental duplicate intake or identity/destination changes outside the Library's migration rules.
 5. Propose/reuse project collections and choose a coherent reading order without requiring the user to rank lessons. Preserve unrelated entries; validate affected sibling ranks together.
-6. Check only the specified resource unless a wider sweep is requested. Distinguish source changes, saved changes, conflicts, unavailable sources, and missing tracking records using native facilities.
+6. Find/check requests finish with observations and preserve resource files, registrations, baselines, and Git state. Check only the specified scope unless a wider sweep is requested. Distinguish source changes, saved changes, conflicts, unavailable sources, and missing tracking records using native facilities; a successful link response alone leaves content freshness unverified.
 7. Separate observations from an authorized refresh; preserve edits and verify staged content before replacement and baseline updates.
-8. Verify actual registration, source preservation, native build/inventory, appropriate preview, and Git state. Report admission and deployment only with destination evidence and the required authorization.
+8. Write requests verify actual saved files/registration, source preservation, native build/inventory, appropriate preview, and Git state. Read-only requests need neither a preview nor a commit. Report admission and deployment only with destination evidence and the required authorization.
+9. From an unrelated working directory, resolve helper scripts relative to the installed skill. The legacy entry reaches the canonical intake route; the review-only spec is reached when reviewing or changing the skill rather than loaded for every resource request.
 
 Executable integration checks exercise the native build for hosted and linked candidates, collection proposals, and existing-entry update mode. Read skill instructions against the remaining decision scenarios; passing helper tests do not establish a live end-to-end management run or human acceptance of the homepage.

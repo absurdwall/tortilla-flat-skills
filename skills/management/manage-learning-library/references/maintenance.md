@@ -1,21 +1,23 @@
 # Maintenance
 
-Resolve the user-identified resource in the canonical catalog or private draft index. Read its hosting kind, maintenance evidence, source mapping, collection, current saved content, and blockers. Preserve its identity and destination during ordinary updates.
+Resolve the resource in the canonical catalog or private draft index. Inspect its hosting kind, maintenance source, saved content, collection, and blockers. Read the relevant sections of the verified Library's `docs/management-contract.md` as directed below.
 
 ## Check
 
-For a linked Project Page, use the destination's native link-health facilities and inspect source content only when it is available and relevant to the request. Distinguish availability from content freshness. Content served at a stable source URL can change independently of Library deployment; Library title/summary/classification updates remain separate proposed edits. A redirect is an observation, not an automatic destination migration.
+- **Linked Project Page:** Read **Choose maintenance behavior**. Use native link-health facilities for availability. For a scoped check, pass the checker a temporary canonical-format catalog through `--catalog`, retaining only selected entries and their referenced collection definitions; its default is a full-catalog check. Inspect source content when available and relevant, distinguishing observed content changes from link availability. Report freshness as unverified when comparison evidence is absent. Proposed Library metadata or destination edits are separate write work.
+- **Source-maintained Library Page:** Read **Private imported-source record** and run the native package-scoped `source:check`. Interpret all tracked file observations, including assets, using that contract's state definitions. Recover legacy baselines only from trustworthy recorded evidence; report missing/unavailable tracking as uncertainty.
+- **Library-maintained resource:** Inspect its authoritative Library copy and any change relevant to the request. Treat retained source-project locations as provenance; external changes do not imply that this copy needs refreshing.
 
-For a source-maintained Library Page, run the native `source:check` command for its package. Use the destination's state definitions and full file mapping. An unchanged HTML file does not establish unchanged assets. Missing source files, a missing record, or an offline source mean uncertainty, not freshness. If only old private notes exist, recover trustworthy historical baselines from those notes; do not relabel current files as an earlier imported baseline.
-
-A request such as “manage this page” starts with inspection and a useful scoped assessment. A check-only request finishes with its findings. A source update can justify a proposed refresh, but does not itself authorize replacing the saved package or changing an admitted entry.
+Report the checked scope, evidence, state, and a useful next action. This completes a check-only or general “manage this page” assessment. Continue to refresh when that action is authorized.
 
 ## Refresh
 
-When refresh is requested, use the Library's refresh workflow. For a source-maintained import, reconstruct a staged package from the updated source, re-inventory dependencies, and reapply documented adaptations. Preserve intentional Library edits. If both source and saved content changed, inspect the concrete difference before replacement; resolve ordinary safe adaptations yourself and ask only when a substantive conflict cannot be resolved from the recorded intent.
+Read **Refresh workflow** in the Library contract before preparing a replacement. For a hosted source-maintained import, use [intake.md](intake.md), section **Prepare hosted content**, to reconstruct a staged package and re-inventory dependencies. Preserve its stable identity, destination, collection, and intentional adaptations. Resolve source/saved conflicts from concrete differences and recorded intent; ask when a substantive choice remains unresolved.
 
-Reuse the existing entry/slug/destination and collection. Reassess reading order with the surrounding material, preserving a coherent sequence. Candidate metadata updates, new dependencies, and affected sibling ranks belong in the reviewable proposal. Use the helper's `--mode update` for a single admitted entry replacement. For a private draft identity, use the normal candidate path; for multi-entry changes, use the destination's native isolated build with an identity baseline.
+Keep the saved baseline intact during staging. A newly prepared source record belongs to the staged replacement until the validated handoff.
 
-Before replacement, verify neither source nor saved files changed after inspection. Validate the staged content and browser behavior first. Save the replacement only within the user's authorized scope and the Library's admission rules; update source/saved baselines after a successful handoff, never to suppress a detected difference. Confirm file/index readback, record actual results, and commit scoped changes. Leave source-project originals in place.
+Apply the main skill's organization guidance if the updated material affects reading order. Prepare metadata, new dependencies, and affected sibling ranks in the same scoped proposal. Use the main skill's helper-mode guidance to distinguish a private draft from an admitted identity; use native Library tools for multi-entry proposals.
 
-For Library-maintained resources, propose edits to that authoritative copy. A retained original-project path is provenance, not an ongoing synchronization promise. Keep maintenance-authority transfers explicit in private notes.
+For a linked resource, refresh the requested Library metadata after checking available source evidence. Keep content at the canonical source URL and follow the Library's destination-migration rules for any proposed URL change. For Library-maintained content, stage edits to that authoritative copy.
+
+Validate staged content and applicable browser behavior. Before replacement, follow the contract's source/saved-version recheck and baseline-update procedure. Save within the request's scope and destination approval rules, then finish using the main skill's write completion criteria.
