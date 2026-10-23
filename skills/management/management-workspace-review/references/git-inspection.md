@@ -46,3 +46,9 @@ git --no-optional-locks rev-list --left-right --count <local-tip>...<remote-tip>
 The left count is local-only commits; retain a nonzero right count as remote-only work or divergence context. Equal live tips establish zero local-only commits. If a live tip's objects are unavailable locally, a comparison against the cached upstream must be labeled cached; leave the current unpublished count unknown. Likewise identify shallow or incomplete history as a limit on ancestry-based conclusions.
 
 A missing or gone upstream is not zero unpublished commits. Report the branch and tracking gap; use an explicit, established remote counterpart if available, otherwise leave its publication status unresolved. For detached worktrees, report HEAD and the absence of branch tracking; expand further only when local evidence can establish publication status. Gathering missing objects through fetch would change the repository and requires a separate task.
+
+## Resolve a proposed cleanup
+
+Before recommending branch removal, check whether its commits are contained in the current integration branch and whether a checkout or ongoing work still uses it. Identify local and remote refs separately. A retained teaching branch can have fully integrated commits and still be intentional.
+
+For a dirty or broken checkout, inspect the actual remaining files, including ignored material that removal would affect. Compare meaningful content with its registered HEAD and preserved history using read-only tree/blob or hash comparisons. Distinguish empty directories, remotely saved content, unique local work, and inaccessible content. A missing `.git` file alone leaves these questions unanswered. Keep file-level evidence available so a recommendation to save, align, or remove names what is protected and what would change.
