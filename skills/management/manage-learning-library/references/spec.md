@@ -1,0 +1,18 @@
+# Management skill acceptance
+
+This is the skill's behavioral scope. The verified destination Library defines schemas and publication policy in its own management contract.
+
+The canonical entry point is `manage-learning-library`; `learning-library-add` is a compatibility route into its intake mode. Preserve normal automatic discovery and existing source-project records.
+
+Required scenarios:
+
+1. From an unrelated project, locate and verify the intended Library checkout; use an explicit supplied checkout when present. Report missing updated capabilities instead of routing silently to a different checkout.
+2. Intake local HTML with transitive assets as a saved, registered, read-back private hosted candidate, with separate original and adapted-copy baselines when its source remains authoritative.
+3. Intake a stable public page as a URL-only candidate, with no mirrored site and no fictitious file-copy completion claim.
+4. Reuse an existing identity. Validate an intentional admitted update privately; reject accidental duplicate intake or identity/destination changes outside the Library's migration rules.
+5. Propose/reuse project collections and choose a coherent reading order without requiring the user to rank lessons. Preserve unrelated entries; validate affected sibling ranks together.
+6. Check only the specified resource unless a wider sweep is requested. Distinguish source changes, saved changes, conflicts, unavailable sources, and missing tracking records using native facilities.
+7. Separate observations from an authorized refresh; preserve edits and verify staged content before replacement and baseline updates.
+8. Verify actual registration, source preservation, native build/inventory, appropriate preview, and Git state. Report admission and deployment only with destination evidence and the required authorization.
+
+Executable integration checks exercise the native build for hosted and linked candidates, collection proposals, and existing-entry update mode. Read skill instructions against the remaining decision scenarios; passing helper tests do not establish a live end-to-end management run or human acceptance of the homepage.

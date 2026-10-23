@@ -1,3 +1,13 @@
+# Manage Learning Library validation — 2026-10-23
+
+- Library implementation and browser verification preceded this skill adaptation. Library source, collection, and publication rules remain destination-owned.
+- Canonical skill: `manage-learning-library`; `learning-library-add` and its helper import/CLI path remain compatibility routes. Source, references, UI metadata, and behavioral spec have been updated.
+- 12 helper integration tests pass under Node 22.23.4, including the 7 previous tests with no skips. New cases cover URL-only candidates without mirrors, private collection proposals, intentional same-identity updates, rejected destination migration, collection mismatch, and native source-baseline validation of hosted updates.
+- Tests use the updated Library checkout's native validators/build/inventory and isolated candidates. They confirm canonical catalog readback remains unchanged; they do not admit content, merge, push, or deploy.
+- Both canonical and compatibility skill format checks pass with the bundled validator (PyYAML supplied in an isolated temporary Python environment). A helper invocation from an unrelated working directory also validated an existing saved private candidate and its unchanged native source record, without admission or publication. Both installed skill links were verified against the updated source. These checks do not establish a live end-to-end intake/refresh performed by a separate agent or user acceptance of the new homepage.
+
+## Earlier intake evidence
+
 # Validation — 2026-10-22
 
 `learning-library-add` 默认交接现为保存到真实 Library checkout、登记到私人 Markdown 索引并读回确认；用户明确要求不写目标仓库时才只预览。用户级链接仍指向本仓库源码。以下先记录当前交接验证，再保留初版验证范围。
