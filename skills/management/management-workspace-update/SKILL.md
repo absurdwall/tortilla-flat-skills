@@ -1,11 +1,13 @@
 ---
-name: management-update
-description: Review recent cross-project Codex work, identify Management coverage gaps, and update project progress when requested.
+name: management-workspace-update
+description: Summarize recent cross-project Codex work, identify Management coverage gaps, and update project progress when requested.
 ---
 
-# Management Update
+# Management Workspace Update
 
 Give the user a lightweight overview of what projects are moving, what remains, and where to resume. Recent Codex work is an entry point, including work that has not yet become an Issue or PR.
+
+Inspect project repositories, trackers, and chats read-only. Writes are limited to Management-owned records through their current contracts, including the canonical Registry in the shared workspace root. That location grants no write access to other shared-workspace files or project contents.
 
 ## Get the recent picture
 

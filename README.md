@@ -2,26 +2,33 @@
 
 用户自有、跨项目 skills 的源码仓库。按 `skills/<category>/<skill-name>/SKILL.md` 分类；目标项目继续维护自己的内容、校验器与发布规则。
 
-目前有两项，归入 `management`：
+目前有三项，归入 `management`：
 
 - [learning-library-add](skills/management/learning-library-add/SKILL.md)：将指定 HTML 教学页整理为独立草稿，保存到 Learning Library 仓库、登记并读回确认。
-- [management-update](skills/management/management-update/SKILL.md)：从近期 Codex 工作出发，轻量盘点项目方向、未完成事项和追踪缺口，按请求更新 Management 进展。
+- [management-workspace-update](skills/management/management-workspace-update/SKILL.md)：从近期 Codex 工作出发，轻量盘点项目方向、未完成事项和追踪缺口，按请求更新 Management 进展。
+- [management-workspace-review](skills/management/management-workspace-review/SKILL.md)：检查活跃项目的本地与远端分支、额外 worktree、未提交改动及未推送 commits，解释合理例外并给出只读报告。
 
 ## 项目盘点与更新
 
-将 `skills/management/management-update` 单独链接到用户级发现目录，方式同下文。它依赖已安装且已绑定工作区的 `tortilla-flat-management` skill/helper；已有工具继续负责 Registry 写入和读回。本仓库负责跨项目盘点流程。
+将两个 `management-workspace-*` 文件夹分别链接到用户级发现目录，方式同下文。它们使用已安装且已绑定工作区的 `tortilla-flat-management` 包定位现有 Registry；原生 helper 继续负责管理数据写入和读回。
 
 ```sh
 # 在仓库根目录执行；若目标已存在，先检查来源，不覆盖。
-ln -s "$PWD/skills/management/management-update" "$HOME/.agents/skills/management-update"
+ln -s "$PWD/skills/management/management-workspace-update" "$HOME/.agents/skills/management-workspace-update"
+ln -s "$PWD/skills/management/management-workspace-review" "$HOME/.agents/skills/management-workspace-review"
 ```
 
 ```text
-$management-update 帮我盘点现在各个项目在做什么、还差什么，并更新 Management 中已有项目的进展。
-$management-update 只检查 Codex 项目与 Registry 的差异，先不要写入。
+$management-workspace-update 帮我盘点现在各个项目在做什么、还差什么，并更新 Management 中已有项目的进展。
+$management-workspace-update 只检查 Codex 项目与 Registry 的差异，先不要写入。
+$management-workspace-review 检查活跃项目的工作环境，给我报告。
 ```
 
 默认先看项目清单和近期聊天摘要，按需要读相关对话及 Issue、PR，形成足够可信的近况概览。盘点会指出覆盖范围、新项目和追踪缺口；写入更新时复用 Management 原生 helper 并读回确认。面板自身的状态统计与加载速度仍由产品实现负责。
+
+Review 区分符合基线、合理例外、值得检查和未知状态；每周教学分支或正在进行的工作不因偏离基线而自动被视为问题。额外 worktree 不包含主 checkout。检查保留各项目的文件、Git 状态和远端 tracker；如请求保存报告，只写 Management 自有记录。Registry 继续保留在共享工作区根目录，这项维护授权不扩展到根仓库其他内容。
+
+`management-update` 已改名为 `management-workspace-update`。更新已有安装时，先核对旧链接确实指向本仓库的旧 skill，再移除该链接并安装新名称；保留来源不明的安装。
 
 ## 安装与调用
 

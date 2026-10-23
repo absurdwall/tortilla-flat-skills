@@ -1,0 +1,3 @@
+interface:
+  display_name: "Management Workspace Review"
+  short_description: "Inspect project branches, worktrees, and unpublished work"
