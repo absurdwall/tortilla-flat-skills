@@ -8,7 +8,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-export async function checkDraft({ library, packageRoot }) {
+export async function checkDraft({ library, packageRoot, mode = 'new' }) {
+  if (!['new', 'update'].includes(mode)) throw new Error('mode must be new or update');
   library = await realpath(resolve(library));
   packageRoot = await realpath(resolve(packageRoot));
   const catalogPath = join(library, 'catalog/catalog.json');
@@ -18,14 +19,46 @@ export async function checkDraft({ library, packageRoot }) {
   );
   const catalog = validateCatalog(parseCatalog(originalCatalog));
   const entry = JSON.parse(await readFile(join(packageRoot, 'entry.json'), 'utf8'));
-  if (entry.ownership?.kind !== 'library') {
-    throw new Error('This helper prepares independent Library Pages; use the Library workflow for project URLs.');
-  }
-  if (catalog.entries.some(item => item.id === entry.id || item.slug === entry.slug)) {
+  const existing = catalog.entries.find(item => item.id === entry.id);
+  if (mode === 'new' && catalog.entries.some(item => item.id === entry.id || item.slug === entry.slug)) {
     throw new Error('Existing identity: use the Library update workflow instead of a new intake.');
   }
+  if (mode === 'update' && !existing) throw new Error('Update mode requires an existing entry identity.');
+  const collections = [...(catalog.collections ?? [])];
+  let proposedCollection;
+  try {
+    proposedCollection = JSON.parse(await readFile(join(packageRoot, 'collection.json'), 'utf8'));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw new Error('collection.json could not be read as JSON');
+  }
+  if (proposedCollection) {
+    if (proposedCollection.id !== entry.collectionId) throw new Error('Collection proposal must match entry.collectionId.');
+    const currentCollection = collections.find(item => item.id === proposedCollection.id);
+    if (currentCollection) {
+      if (Object.keys(proposedCollection).length !== 3 || ['id', 'title', 'summary'].some(key => proposedCollection[key] !== currentCollection[key])) {
+        throw new Error('Existing collection metadata differs; prepare a scoped catalog proposal.');
+      }
+    } else collections.push(proposedCollection);
+  }
   // Validate paths with the owning contract before using any as copy destinations.
-  const candidate = validateCatalog({ ...catalog, entries: [...catalog.entries, entry] });
+  const candidateEntries = existing
+    ? catalog.entries.map(item => item.id === entry.id ? entry : item)
+    : [...catalog.entries, entry];
+  const candidate = validateCatalog({ ...catalog, ...(collections.length ? { collections } : {}), entries: candidateEntries });
+  let sourceCheck = { state: 'not-applicable' };
+  if (entry.ownership.kind === 'library') {
+    try {
+      await readFile(join(packageRoot, 'source.json'), 'utf8');
+      const { checkSource } = await import(pathToFileURL(join(library, 'scripts/source-record.mjs')).href);
+      sourceCheck = await checkSource(packageRoot);
+      if (sourceCheck.sourceChanged || sourceCheck.libraryChanged) {
+        throw new Error('Prepared package differs from its source/saved baseline; inspect before updating the record.');
+      }
+    } catch (error) {
+      if (error.code === 'ENOENT' && error.path === join(packageRoot, 'source.json')) sourceCheck = { state: 'untracked' };
+      else throw error;
+    }
+  }
   const scratch = await mkdtemp(join(tmpdir(), 'learning-library-draft-'));
   const source = join(scratch, 'source');
   const artifact = join(scratch, 'artifact');
@@ -69,11 +102,13 @@ export async function checkDraft({ library, packageRoot }) {
       throw new Error('Library catalog changed during validation; re-read and validate a fresh draft.');
     }
     const result = {
-      state: 'draft', staticValidation: 'passed', browserValidation: 'pending',
+      state: mode === 'update' ? 'update-proposal' : 'draft', staticValidation: 'passed', browserValidation: 'pending',
       admission: 'not-performed', publication: 'not-performed',
       scratch, artifact, inventory: inventoryPath,
       catalogSha256: createHash('sha256').update(originalCatalog).digest('hex'),
       entryId: entry.id, pagePath: entry.ownership.path,
+      destination: entry.ownership.kind === 'library' ? entry.ownership.path : entry.ownership.url,
+      sourceCheck,
     };
     await writeFile(join(scratch, 'validation.json'), JSON.stringify(result, null, 2) + '\n');
     return result;
@@ -86,18 +121,18 @@ export async function checkDraft({ library, packageRoot }) {
 function argumentsFrom(argv) {
   const values = {};
   for (let i = 0; i < argv.length; i += 2) {
-    if (!['--library', '--package'].includes(argv[i]) || !argv[i + 1] || argv[i + 1].startsWith('--') || values[argv[i]]) {
-      throw new Error('Usage: check-draft.mjs --library <checkout> --package <prepared-directory>');
+    if (!['--library', '--package', '--mode'].includes(argv[i]) || !argv[i + 1] || argv[i + 1].startsWith('--') || values[argv[i]]) {
+      throw new Error('Usage: check-draft.mjs --library <checkout> --package <prepared-directory> [--mode new|update]');
     }
     values[argv[i]] = argv[i + 1];
   }
   if (!values['--library'] || !values['--package']) {
     throw new Error('Usage: check-draft.mjs --library <checkout> --package <prepared-directory>');
   }
-  return { library: values['--library'], packageRoot: values['--package'] };
+  return { library: values['--library'], packageRoot: values['--package'], mode: values['--mode'] ?? 'new' };
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+export async function runCli() {
   try {
     console.log(JSON.stringify(await checkDraft(argumentsFrom(process.argv.slice(2))), null, 2));
   } catch (error) {
@@ -105,3 +140,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     process.exitCode = 1;
   }
 }
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await runCli();
