@@ -5,7 +5,7 @@ description: Review active project working environments and recommend specific a
 
 # Management Workspace Review
 
-Inspect the working environment read-only and return concrete recommendations grouped by project. Project direction and progress updates belong to `management-workspace-update`.
+Inspect the working environment read-only and return a repository overview followed by concrete recommendations grouped by project. Project direction and progress updates belong to `management-workspace-update`.
 
 ## Select the projects
 
@@ -33,12 +33,20 @@ Use project conventions, relevant PRs, and recent chat summaries to explain depa
 
 Finish obtainable read-only checks before reporting. For a meaningful dirty checkout or stale worktree, establish whether it contains work that still needs saving and whether it is in use. Explaining a change's origin does not establish that it is finished: completed management-data or daily-record changes can still warrant a commit. This step is complete when each meaningful departure has a concrete recommendation, an evidence-backed reason to leave it alone, or a genuine access or decision blocker.
 
-## Recommend actions by project
+## Report the overview, then recommendations
 
-Lead with the actual completion state and the number of projects for which action is recommended. Give each such project its own section, with concise bullets naming the action, exact target, and reason. For a branch, identify its name and whether the recommendation concerns the local branch, a specific remote branch, or both. Choose whether to recommend an action; replace vague labels such as "partly ready for cleanup" with the actual recommendation.
+Lead with the actual completion state, the number of projects for which action is recommended, and confirmation that recommendations remain unexecuted. Return these two parts in the user's language:
 
-Omit projects that match baseline or only have justified ongoing work. If inspection is complete and nothing warrants action, state prominently: **Review complete. Your action: none.** When access blocks a check, identify partial completion and its impact in a compact coverage note. Keep the full inventory as supporting detail when useful or requested.
+### 1. Repository overview
 
-Ask the user only for consequential decisions or access that the available evidence cannot settle, identifying the project, precise question, and recommended choice. Findings that can be resolved by further read-only inspection remain the agent's work. State clearly that recommendations have not been executed; cleanup or source-project changes require a separate request.
+Start with a table covering every scoped repository, including those that match baseline or only have justified ongoing work. Show local branch counts, live branch counts per remote, additional worktree counts, uncommitted and unpushed work, and confirmed retention reasons. Identify retained branches by exact name and local or remote location; distinguish the default branch, documented exceptions, ongoing work, and unresolved retention. Use compact project-specific notes for long branch groups. Mark unknown or cached observations explicitly rather than treating them as zero or confirmed retention. Preserve project associations for shared repositories.
 
-Return the report in the user's language with a brief scope, observation time, and remote freshness note. If the user requests persistence, use an established Management-owned report location or interface and confirm readback. The canonical Registry remains in the shared workspace root; permission to maintain Management records does not extend to other files there. Keep private findings outside this public skills repository. Completion means all scoped repositories are accounted for, recommendations are ready to act on, and any requested report write is confirmed or explicitly pending.
+### 2. Recommended actions by project
+
+Present a table with columns **Project | Recommended action | Reason**. Include only projects with recommended actions, keeping each project's recommendations together in one row. Use direct action verbs and concise reasons. If inspection is complete and nothing warrants action, state prominently: **Review complete. Your action: none.** The overview remains part of that report.
+
+Make each project's recommendation self-contained: name branch targets and whether local, on a specific remote, or both, and identify worktree paths. Keep necessary target lists with that recommendation. For a batch of files to save, give its directory or file pattern, scope, and count; enumerate individual files when their treatment differs. Reserve exhaustive file-level evidence for the supporting record. The user must be able to understand the recommendation and its targets without opening a link. A full supporting record may be linked once as optional evidence; keep the report's structure to the overview and project recommendations.
+
+Ask the user only for consequential decisions or access that the available evidence cannot settle, identifying the project, precise question, and recommended choice. Findings that can be resolved by further read-only inspection remain the agent's work. Cleanup or source-project changes require a separate request.
+
+Finish with a brief coverage note: scope, observation time, remote freshness, and any gaps that limit the conclusion. Mark blocked checks as partial completion rather than a clean result. If the user requests persistence, use an established Management-owned report location or interface and confirm readback. The canonical Registry remains in the shared workspace root; permission to maintain Management records does not extend to other files there. Keep private findings outside this public skills repository. Completion means all scoped repositories are accounted for, recommendations are ready to act on, and any requested report write is confirmed or explicitly pending.
